@@ -1,7 +1,7 @@
-import './App.css';
-import InputData from "./components/Input_data/Input_data";
-import OutputList from "./components/Output_list/Output_list";
+import InputData from "./components/Input_data";
+import OutputList from "./components/Output_list";
 import {createContext, useEffect, useState} from "react";
+import {Wrapper} from "./styled/AppStyle";
 
 export const AppContext = createContext(null);
 
@@ -17,11 +17,15 @@ function App() {
     }, [list])
 
     const addToList = (name, desc, option, price) => {
-      setList(prevState => [...prevState, { name, desc, option, price }]);
-      setName('');
-      setDesc('');
-      setPrice('');
-      setOption('');
+        if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
+            setList(prevState => [...prevState, { name, desc, option, price }]);
+        } else {
+            alert('Fill all poles');
+        }
+        setName('');
+        setDesc('');
+        setPrice('');
+        setOption('');
     }
 
     const deleteFromList = (name) => {
@@ -30,13 +34,11 @@ function App() {
 
   return (
       <AppContext.Provider value={{name, setName, desc, setDesc, price, setPrice, option, setOption, list, setList, addToList, deleteFromList}}>
-          <div className="App">
-              <h1>Hello</h1>
-              <div className="container">
+              <h1>Web application for calculating the costs of equipment</h1>
+              <Wrapper>
                   <InputData/>
                   <OutputList/>
-              </div>
-          </div>
+              </Wrapper>
       </AppContext.Provider>
   );
 }
