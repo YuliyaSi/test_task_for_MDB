@@ -23,6 +23,12 @@ function OutputList() {
                     <td><button onClick={() => deleteFromList(listItem.name)}>Delete</button></td>
                 </tr>)}
                 </tbody>}
+                <tfoot>
+                <tr>
+                    <td>Total:</td>
+                    <td>{list.reduce((acc, next) => acc + Number(next.price), 0)}</td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     );
