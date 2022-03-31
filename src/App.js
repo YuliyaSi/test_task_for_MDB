@@ -9,7 +9,7 @@ function App() {
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
-    const [option, setOption] = useState('');
+    const [category, setCategory] = useState('');
     const [list, setList] = useState(JSON.parse(localStorage.getItem('list')) || []);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
         setName('');
         setDesc('');
         setPrice('');
-        setOption('');
+        setCategory('');
     }
 
     const deleteFromList = (name) => {
@@ -33,7 +33,7 @@ function App() {
     }
 
   return (
-      <AppContext.Provider value={{name, setName, desc, setDesc, price, setPrice, option, setOption, list, setList, addToList, deleteFromList}}>
+      <AppContext.Provider value={{name, setName, desc, setDesc, price, setPrice, category, setCategory, list, setList, addToList, deleteFromList}}>
               <h1>Web application for calculating the costs of equipment</h1>
               <Wrapper>
                   <InputData/>

@@ -1,16 +1,17 @@
 import React, {useContext} from 'react';
 import {AppContext} from "../App";
+import {Table, Wrapper} from "../styled/Output_list_styles";
 
 function OutputList() {
     const { list, deleteFromList } = useContext(AppContext);
     return (
-        <div style={{backgroundColor: '#bbac67', width: '40%', height: '100vh'}}>
-            <table>
+        <Wrapper>
+            <Table>
                 <thead>
                 <tr>
                     <td>Name</td>
                     <td>Description</td>
-                    <td>Option</td>
+                    <td>Category</td>
                     <td>Price</td>
                 </tr>
                 </thead>
@@ -25,12 +26,12 @@ function OutputList() {
                 </tbody>}
                 <tfoot>
                 <tr>
-                    <td>Total:</td>
-                    <td>{list.reduce((acc, next) => acc + Number(next.price), 0)}</td>
+                    <td colSpan={3}>Total:</td>
+                    <td colSpan={2}>{list.reduce((acc, next) => acc + Number(next.price), 0)}</td>
                 </tr>
                 </tfoot>
-            </table>
-        </div>
+            </Table>
+        </Wrapper>
     );
 }
 

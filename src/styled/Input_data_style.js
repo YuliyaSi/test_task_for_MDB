@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Input = styled.input.attrs({ type: 'text' })`
   padding: 0.5em;
-  margin: 0.5em;
+  margin: 0.5em 0;
   background: papayawhip;
   border: none;
   border-radius: 3px;
@@ -11,11 +11,11 @@ export const Input = styled.input.attrs({ type: 'text' })`
 
 export const Select = styled.select`
   padding: 0.5em;
-  margin: 0.5em;
+  margin: 0.5em 0;
   background: papayawhip;
   border: none;
   border-radius: 3px;
-  width: 80%;
+  width: 265px;
 `;
 
 export const Wrapper = styled.div`
