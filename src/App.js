@@ -1,7 +1,7 @@
 import InputData from "./components/Input_data";
 import OutputList from "./components/Output_list";
 import {createContext, useEffect, useState} from "react";
-import {Nav, Wrapper} from "./styled/AppStyle";
+import {Nav, WrapperApp} from "./styled/AppStyle";
 
 export const AppContext = createContext(null);
 
@@ -50,10 +50,10 @@ function App() {
             <Nav>
                 <h1>Web application for calculating the costs of equipment</h1>
             </Nav>
-            <Wrapper>
+            <WrapperApp>
                 <InputData/>
                 <OutputList/>
-            </Wrapper>
+            </WrapperApp>
         </AppContext.Provider>
     );
 }

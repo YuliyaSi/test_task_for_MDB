@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {AppContext} from "../App";
-import {Table, Wrapper} from "../styled/Output_list_styles";
+import {Table, WrapperOut} from "../styled/Output_list_styles";
 import {FiDelete} from "react-icons/fi";
 
 function OutputList() {
     const { list, deleteFromList } = useContext(AppContext);
     return (
-        <Wrapper>
+        <WrapperOut>
             <Table>
                 <thead>
                 <tr>
@@ -31,7 +31,7 @@ function OutputList() {
                 <tfoot>
                 <tr>
                     <td colSpan={3}>Total:</td>
-                    <td colSpan={3}>{list.reduce((acc, next) => acc + Number(next.price), 0)}</td>
+                    <td colSpan={3}>{list.reduce((acc, next) => acc + Number(next.price), 0)}$</td>
                 </tr>
                 <tr>
                     <td colSpan={3}>Total count:</td>
@@ -39,7 +39,7 @@ function OutputList() {
                 </tr>
                 </tfoot>
             </Table>
-        </Wrapper>
+        </WrapperOut>
     );
 }
 

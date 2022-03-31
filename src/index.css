@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&display=swap');
+:root {
+  --color: #ffefd5;
+}
 * {
   margin: 0;
   padding: 0;
@@ -6,4 +9,10 @@
   font-family: 'Comfortaa', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body {
+  background-image: url("./assets/background.jpg");
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
