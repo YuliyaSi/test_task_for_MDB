@@ -27,6 +27,7 @@ function InputData() {
             </label>
             <br/>
             <Select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option value="">--- choose category ---</option>
                 <option value="computers&laptops">Computers and laptops</option>
                 <option value="monitors">Monitors</option>
                 <option value="computer accessories">Computer accessories</option>

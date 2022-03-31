@@ -6,17 +6,22 @@ export const Wrapper = styled.div`
 `;
 
 export const Table = styled.table`
-   thead {
+  thead {
     border-bottom: .5px solid black;
+  }
+  thead td {
+    background-color: papayawhip;
   }
   td {
     border-right: .5px solid black;
+    height: 2em;
   }
+
   tfoot {
     border-top: .5px solid black;
   }
+
   width: 100%;
-  background-color: papayawhip;
   border-collapse: collapse;
   border: 1px solid;
   text-align: center;
