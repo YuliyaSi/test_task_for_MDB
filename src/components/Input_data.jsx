@@ -44,13 +44,13 @@ function InputData() {
                 <p>Category of item</p>
                 <Select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">--- choose category ---</option>
-                    <option value="computers&laptops">Computers and laptops</option>
-                    <option value="monitors">Monitors</option>
-                    <option value="computer accessories">Computer accessories</option>
-                    <option value="computer headphones">Computer headphones</option>
-                    <option value="printers&devices ">Printers and multifunction devices</option>
-                    <option value="software">Software</option>
-                    <option value="office">Office accessorises</option>
+                    <option value="Computers and laptops">Computers and laptops</option>
+                    <option value="Monitors">Monitors</option>
+                    <option value="Computer accessories">Computer accessories</option>
+                    <option value="Computer headphones">Computer headphones</option>
+                    <option value="Printers and multifunction devices">Printers and multifunction devices</option>
+                    <option value="Software">Software</option>
+                    <option value="Office accessorises">Office accessorises</option>
                     <option value="Other accessories">Other accessories</option>
                 </Select>
             </div>

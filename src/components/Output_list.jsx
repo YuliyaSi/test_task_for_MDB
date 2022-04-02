@@ -1,12 +1,12 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {AppContext} from "../App";
 import {Table, WrapperOut} from "../styled/Output_list_styles";
 import {FiDelete} from "react-icons/fi";
+import {Select} from "../styled/Input_data_style";
 
 function OutputList() {
 
-    const { list, deleteFromList, countPrice, totalPrice } = useContext(AppContext);
-    const [category, setCategory] = useState('all');
+    const { list, deleteFromList, countPrice, totalPrice, totalPos, countCategory } = useContext(AppContext);
 
     if (list.length === 0) return;
 
@@ -39,7 +39,7 @@ function OutputList() {
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colSpan={3}>Total:</td>
+                        <td colSpan={3}>Total for {item.fullname}:</td>
                         <td colSpan={3}>{item.equipment.reduce((acc, next) => acc + Number(next.price), 0)}$</td>
                     </tr>
                     <tr>
@@ -55,26 +55,23 @@ function OutputList() {
                 <Table>
                     <tbody>
                     <tr>
-                        <td colSpan={3}>Total positions:</td>
-                        <td colSpan={3}>{list.reduce((acc, next) => acc + next.equipment.length, 0)}</td>
+                        <td className='total' colSpan={3}>Total positions:</td>
+                        <td colSpan={3}>{totalPos}</td>
                     </tr>
                     <tr>
-                        <td colSpan={3}>
+                        <td className='total' colSpan={3}>
                             Total price:
-                            <select value={category} onChange={(e) => {
-                                setCategory(e.target.value)
-                                countPrice(e.target.value)
-                            }}>
+                            <Select value={countCategory} onChange={(e) => countPrice(e.target.value)}>
                                 <option value="all">All</option>
-                                <option value="computers&laptops">Computers and laptops</option>
-                                <option value="monitors">Monitors</option>
-                                <option value="computer accessories">Computer accessories</option>
-                                <option value="computer headphones">Computer headphones</option>
-                                <option value="printers&devices ">Printers and multifunction devices</option>
-                                <option value="software">Software</option>
-                                <option value="office">Office accessorises</option>
+                                <option value="Computers and laptops">Computers and laptops</option>
+                                <option value="Monitors">Monitors</option>
+                                <option value="Computer accessories">Computer accessories</option>
+                                <option value="Computer headphones">Computer headphones</option>
+                                <option value="Printers and multifunction devices">Printers and multifunction devices</option>
+                                <option value="Software">Software</option>
+                                <option value="Office accessorises">Office accessorises</option>
                                 <option value="Other accessories">Other accessories</option>
-                            </select>
+                            </Select>
                         </td>
                         <td colSpan={3}>{totalPrice}</td>
                     </tr>

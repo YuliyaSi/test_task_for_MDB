@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const WrapperOut = styled.div`
   width: 50%;
-  height: 300px;
+  height: fit-content;
   padding: 2rem;
+  background-color: #fff;
 `;
 
 export const Table = styled.table`
@@ -26,10 +27,20 @@ export const Table = styled.table`
   td {
     border-right: .5px solid black;
     height: 2em;
+    min-width: 3rem;
   }
 
   tfoot {
     border-top: .5px solid black;
+  }
+  .total {
+    text-align: left;
+    padding-left: 2rem;
+  }
+  .total Select {
+    margin-left: .5rem;
+    width: 15rem;
+    height: 2rem;
   }
   border: 1px solid black;
   width: 100%;

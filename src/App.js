@@ -14,7 +14,9 @@ function App() {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [list, setList] = useState(JSON.parse(localStorage.getItem('list')) || []);
-    const [totalPrice, setTotalPrice] = useState(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0) || 0)
+    const [totalPrice, setTotalPrice] = useState(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0) || 0);
+    const [countCategory, setCountCategory] = useState('all');
+    const [totalPos, setTotalPos] = useState(list.reduce((acc, next) => acc + next.equipment.length, 0));
 
     useEffect(() => {
         localStorage.setItem('list', JSON.stringify(list))
@@ -44,18 +46,18 @@ function App() {
         setList(newList.filter(employee => employee.equipment.length !== 0));
     }
 
-    const countPrice = (category) => {
-        if(category === 'all') {
+    const countPrice = (value) => {
+        setCountCategory(value);
+        if(value === 'all') {
             setTotalPrice(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0))
         } else {
             const newList = [];
-            list.forEach(employee => employee.equipment.forEach(item => newList.push(item)))
-
-
-            setTotalPrice(newList.filter(item => item.option === category).reduce((acc, next) => acc + Number(next.price), 0))
-            console.log(newList)
-            console.log(category)
+            list.forEach(employee => employee.equipment.forEach(item => newList.push(item)));
+            const filteredList = newList.filter(item => item.option === value);
+            setTotalPrice(filteredList.reduce((acc, next) => acc + Number(next.price), 0))
+            setTotalPos(filteredList.length);
         }
+
     }
 
     return (
@@ -73,7 +75,7 @@ function App() {
             addToList,
             deleteFromList,
             countPrice,
-            fullname, setFullname, work, setWork, totalPrice
+            fullname, setFullname, work, setWork, totalPrice, countCategory, totalPos
         }}>
             <Nav>
                 <h1>Web application for calculating the costs of equipment</h1>
