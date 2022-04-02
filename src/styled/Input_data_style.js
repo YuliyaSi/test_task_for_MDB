@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
   }
 
   width: 40%;
-  height: 80vh;
+  height: fit-content;
   padding: 1rem;
   background: rgba(255,255,255,0.5);
   -webkit-backdrop-filter: blur(10px);

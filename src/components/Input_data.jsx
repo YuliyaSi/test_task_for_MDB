@@ -4,10 +4,26 @@ import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
 
 function InputData() {
 
-    const {name, setName, desc, setDesc, price, setPrice, category, setCategory, addToList} = useContext(AppContext);
+    const {name, setName, desc, setDesc, price, setPrice, category, setCategory, addToList, fullname, setFullname, work, setWork} = useContext(AppContext);
 
     return (
         <Wrapper>
+            <div>
+                <p>Full name of employee</p>
+                <Input
+                    placeholder={'e.g: Jan Kowalski'}
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                />
+            </div>
+            <div>
+                <p>Position held</p>
+                <Input
+                    placeholder={'e.g: junior frontend developer'}
+                    value={work}
+                    onChange={(e) => setWork(e.target.value)}
+                />
+            </div>
             <div>
                 <p>Name of position</p>
                 <Input
@@ -46,7 +62,7 @@ function InputData() {
                     onChange={(e) => setPrice(e.target.value)}
                 />
             </div>
-            <Button onClick={() => addToList(name, desc, category, price)}>Add to the list</Button>
+            <Button onClick={() => addToList(fullname, work, name, desc, category, price)}>Add to the list</Button>
         </Wrapper>
     );
 }

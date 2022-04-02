@@ -7,12 +7,20 @@ export const WrapperOut = styled.div`
 `;
 
 export const Table = styled.table`
+  caption {
+    background-color: #dde1e4;
+    text-align: left;
+    padding: .5rem;
+  }
+  caption span {
+    margin-left: 1rem;
+  }
   thead {
     border-bottom: .5px solid black;
   }
 
   thead td {
-    background-color: papayawhip;
+    background-color: var(--color);
   }
 
   td {
@@ -29,4 +37,5 @@ export const Table = styled.table`
   text-align: center;
   padding: 1em;
   background-color: #dde1e4;
+  margin-bottom: 1rem;
 `;

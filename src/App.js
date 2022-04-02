@@ -2,10 +2,13 @@ import InputData from "./components/Input_data";
 import OutputList from "./components/Output_list";
 import {createContext, useEffect, useState} from "react";
 import {Nav, WrapperApp} from "./styled/AppStyle";
+import Footer from "./components/Footer";
 
 export const AppContext = createContext(null);
 
 function App() {
+    const [fullname, setFullname] = useState('');
+    const [work, setWork] = useState('');
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
@@ -16,9 +19,16 @@ function App() {
         localStorage.setItem('list', JSON.stringify(list))
     }, [list])
 
-    const addToList = (name, desc, option, price) => {
-        if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
-            setList(prevState => [...prevState, {name, desc, option, price}]);
+    const addToList = (fullname, work, name, desc, option, price) => {
+        if (list.some(item => item.fullname === fullname && item.work === work)) {
+            const employee = list.find(employee => employee.fullname === fullname && employee.work === work);
+            employee.equipment.push({name, desc, option, price})
+        } else if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
+            setList(prevState => [...prevState, {
+                fullname,
+                work,
+                equipment: [ {name, desc, option, price} ],
+            }]);
         } else {
             alert('Fill all poles');
         }
@@ -28,8 +38,8 @@ function App() {
         setCategory('');
     }
 
-    const deleteFromList = (name) => {
-        setList(list.filter(item => item.name !== name))
+    const deleteFromList = (fullname, work, name) => {
+        setList(list.map(employee => (employee.fullname === fullname && employee.work === work) ? {...employee, equipment: employee.equipment.filter(item => item.name !== name)} : employee))
     }
 
     return (
@@ -45,7 +55,8 @@ function App() {
             list,
             setList,
             addToList,
-            deleteFromList
+            deleteFromList,
+            fullname, setFullname, work, setWork
         }}>
             <Nav>
                 <h1>Web application for calculating the costs of equipment</h1>
@@ -54,6 +65,7 @@ function App() {
                 <InputData/>
                 <OutputList/>
             </WrapperApp>
+            <Footer/>
         </AppContext.Provider>
     );
 }
