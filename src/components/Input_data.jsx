@@ -4,7 +4,21 @@ import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
 
 function InputData() {
 
-    const {name, setName, desc, setDesc, price, setPrice, category, setCategory, addToList, fullname, setFullname, work, setWork} = useContext(AppContext);
+    const {
+        name,
+        setName,
+        desc,
+        setDesc,
+        price,
+        setPrice,
+        category,
+        setCategory,
+        addToList,
+        fullname,
+        setFullname,
+        work,
+        setWork
+    } = useContext(AppContext);
 
     return (
         <Wrapper>

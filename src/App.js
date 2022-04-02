@@ -30,7 +30,7 @@ function App() {
             setList(prevState => [...prevState, {
                 fullname,
                 work,
-                equipment: [ {name, desc, option, price} ],
+                equipment: [{name, desc, option, price}],
             }]);
         } else {
             alert('Fill all poles');
@@ -42,14 +42,18 @@ function App() {
     }
 
     const deleteFromList = (fullname, work, name) => {
-        const newList = list.map(employee => (employee.fullname === fullname && employee.work === work) ? {...employee, equipment: employee.equipment.filter(item => item.name !== name)} : employee);
+        const newList = list.map(employee => (employee.fullname === fullname && employee.work === work) ? {
+            ...employee,
+            equipment: employee.equipment.filter(item => item.name !== name)
+        } : employee);
         setList(newList.filter(employee => employee.equipment.length !== 0));
     }
 
     const countPrice = (value) => {
         setCountCategory(value);
-        if(value === 'all') {
-            setTotalPrice(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0))
+        if (value === 'all') {
+            setTotalPrice(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0));
+            setTotalPos(list.reduce((acc, next) => acc + next.equipment.length, 0))
         } else {
             const newList = [];
             list.forEach(employee => employee.equipment.forEach(item => newList.push(item)));
@@ -62,20 +66,18 @@ function App() {
 
     return (
         <AppContext.Provider value={{
-            name,
-            setName,
-            desc,
-            setDesc,
-            price,
-            setPrice,
-            category,
-            setCategory,
-            list,
-            setList,
+            name, setName,
+            desc, setDesc,
+            price, setPrice,
+            category, setCategory,
+            list, setList,
+            fullname, setFullname,
+            work, setWork,
+            totalPrice, countCategory, totalPos,
             addToList,
             deleteFromList,
             countPrice,
-            fullname, setFullname, work, setWork, totalPrice, countCategory, totalPos
+
         }}>
             <Nav>
                 <h1>Web application for calculating the costs of equipment</h1>

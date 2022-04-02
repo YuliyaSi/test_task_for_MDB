@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {AppContext} from "../App";
 import {Table, WrapperOut} from "../styled/Output_list_styles";
-import {FiDelete} from "react-icons/fi";
-import {Select} from "../styled/Input_data_style";
+import {FiDelete, FiEdit2} from "react-icons/fi";
+import {Button, Select} from "../styled/Input_data_style";
 
 function OutputList() {
 
-    const { list, deleteFromList, countPrice, totalPrice, totalPos, countCategory } = useContext(AppContext);
+    const {list, deleteFromList, countPrice, totalPrice, totalPos, countCategory, setName, setDesc, setPrice, setCategory} = useContext(AppContext);
+
+    const [editMode, setEditMode] = useState(false);
 
     if (list.length === 0) return;
 
@@ -30,11 +32,26 @@ function OutputList() {
                     <tbody>
                     {item.equipment.map((listItem, ind) => <tr key={listItem.name}>
                         <td>{ind + 1}</td>
-                        <td>{listItem.name}</td>
-                        <td>{listItem.desc}</td>
-                        <td>{listItem.option}</td>
-                        <td>{listItem.price}</td>
-                        <td><FiDelete onClick={() => deleteFromList(item.fullname, item.work, listItem.name)}/></td>
+                        <td>
+                            {editMode ? <input/> : listItem.name}
+                        </td>
+                        <td>
+                            {editMode ? <input/> : listItem.desc}
+                        </td>
+                        <td>
+                            {editMode ? <input/> : listItem.option}
+                        </td>
+                        <td>
+                            {editMode ? <input/> : listItem.price + '$'}
+                        </td>
+                        <td className='with_btn'>
+                            <Button onClick={() => deleteFromList(item.fullname, item.work, listItem.name)}>
+                                <FiDelete/>
+                            </Button>
+                            <Button>
+                                <FiEdit2/>
+                            </Button>
+                        </td>
                     </tr>)}
                     </tbody>
                     <tfoot>
@@ -49,15 +66,11 @@ function OutputList() {
                     </tfoot>
                 </Table>
                 else return null;
-                })
+            })
             }
             <div>
                 <Table>
                     <tbody>
-                    <tr>
-                        <td className='total' colSpan={3}>Total positions:</td>
-                        <td colSpan={3}>{totalPos}</td>
-                    </tr>
                     <tr>
                         <td className='total' colSpan={3}>
                             Total price:
@@ -67,13 +80,18 @@ function OutputList() {
                                 <option value="Monitors">Monitors</option>
                                 <option value="Computer accessories">Computer accessories</option>
                                 <option value="Computer headphones">Computer headphones</option>
-                                <option value="Printers and multifunction devices">Printers and multifunction devices</option>
+                                <option value="Printers and multifunction devices">Printers and multifunction devices
+                                </option>
                                 <option value="Software">Software</option>
                                 <option value="Office accessorises">Office accessorises</option>
                                 <option value="Other accessories">Other accessories</option>
                             </Select>
                         </td>
-                        <td colSpan={3}>{totalPrice}</td>
+                        <td colSpan={3}>{totalPrice}$</td>
+                    </tr>
+                    <tr>
+                        <td className='total' colSpan={3}>Total positions:</td>
+                        <td colSpan={3}>{totalPos}</td>
                     </tr>
                     </tbody>
                 </Table>

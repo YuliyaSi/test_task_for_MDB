@@ -29,6 +29,20 @@ export const Table = styled.table`
     height: 2em;
     min-width: 3rem;
   }
+  .with_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+  }
+  Button {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: .1rem;
+    display: grid;
+    place-items: center;
+    margin: 0;
+  }
 
   tfoot {
     border-top: .5px solid black;
