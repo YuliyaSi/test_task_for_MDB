@@ -8,7 +8,7 @@ export const WrapperOut = styled.div`
 
 export const Table = styled.table`
   caption {
-    background-color: #dde1e4;
+    background-color: #fff;
     text-align: left;
     padding: .5rem;
   }
@@ -36,6 +36,6 @@ export const Table = styled.table`
   border-collapse: collapse;
   text-align: center;
   padding: 1em;
-  background-color: #dde1e4;
+  background-color: #fff;
   margin-bottom: 1rem;
 `;

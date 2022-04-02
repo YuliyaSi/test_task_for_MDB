@@ -14,6 +14,7 @@ function App() {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [list, setList] = useState(JSON.parse(localStorage.getItem('list')) || []);
+    const [totalPrice, setTotalPrice] = useState(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0) || 0)
 
     useEffect(() => {
         localStorage.setItem('list', JSON.stringify(list))
@@ -39,7 +40,22 @@ function App() {
     }
 
     const deleteFromList = (fullname, work, name) => {
-        setList(list.map(employee => (employee.fullname === fullname && employee.work === work) ? {...employee, equipment: employee.equipment.filter(item => item.name !== name)} : employee))
+        const newList = list.map(employee => (employee.fullname === fullname && employee.work === work) ? {...employee, equipment: employee.equipment.filter(item => item.name !== name)} : employee);
+        setList(newList.filter(employee => employee.equipment.length !== 0));
+    }
+
+    const countPrice = (category) => {
+        if(category === 'all') {
+            setTotalPrice(list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0))
+        } else {
+            const newList = [];
+            list.forEach(employee => employee.equipment.forEach(item => newList.push(item)))
+
+
+            setTotalPrice(newList.filter(item => item.option === category).reduce((acc, next) => acc + Number(next.price), 0))
+            console.log(newList)
+            console.log(category)
+        }
     }
 
     return (
@@ -56,7 +72,8 @@ function App() {
             setList,
             addToList,
             deleteFromList,
-            fullname, setFullname, work, setWork
+            countPrice,
+            fullname, setFullname, work, setWork, totalPrice
         }}>
             <Nav>
                 <h1>Web application for calculating the costs of equipment</h1>
