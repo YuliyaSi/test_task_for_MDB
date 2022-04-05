@@ -1,0 +1,1 @@
+export const options = ["Computers and laptops", "Monitors", "Computer accessories", "Computer headphones", "Printers and multifunction devices", "Software", "Office accessorises", "Other accessories"];

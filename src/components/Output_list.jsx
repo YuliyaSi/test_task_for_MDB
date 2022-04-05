@@ -6,7 +6,7 @@ import {Button, Select} from "../styled/Input_data_style";
 
 function OutputList() {
 
-    const {list, totalPrice, totalPos, countCategory, deleteFromList, countPrice} = useContext(AppContext);
+    const {list, totalPrice, totalPos, countCategory, deleteFromList, countPrice, categoryOptions} = useContext(AppContext);
 
     useEffect(() => {
         countPrice('all')
@@ -78,15 +78,7 @@ function OutputList() {
                             Total price:
                             <Select value={countCategory} onChange={(e) => countPrice(e.target.value)}>
                                 <option value="all">All</option>
-                                <option value="Computers and laptops">Computers and laptops</option>
-                                <option value="Monitors">Monitors</option>
-                                <option value="Computer accessories">Computer accessories</option>
-                                <option value="Computer headphones">Computer headphones</option>
-                                <option value="Printers and multifunction devices">Printers and multifunction devices
-                                </option>
-                                <option value="Software">Software</option>
-                                <option value="Office accessorises">Office accessorises</option>
-                                <option value="Other accessories">Other accessories</option>
+                                {categoryOptions.map((opt, ind) => <option key={ind} value={opt}>{opt}</option>)}
                             </Select>
                         </td>
                         <td colSpan={3}>{totalPrice}$</td>

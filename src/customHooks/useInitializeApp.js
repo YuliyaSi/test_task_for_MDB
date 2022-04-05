@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
+import {options} from "../options";
 
 export const useInitializeApp = () => {
+    const [categoryOptions, setCategoryOptions] = useState(options);
     const [fullname, setFullname] = useState('');
     const [work, setWork] = useState('');
     const [name, setName] = useState('');
@@ -17,5 +19,5 @@ export const useInitializeApp = () => {
     }, [list])
 
 
-    return {fullname, setFullname, work, setWork, name, setName, desc, setDesc, price, setPrice, category, setCategory, list, setList, totalPrice, setTotalPrice, countCategory, setCountCategory, totalPos, setTotalPos}
+    return {categoryOptions, setCategoryOptions, fullname, setFullname, work, setWork, name, setName, desc, setDesc, price, setPrice, category, setCategory, list, setList, totalPrice, setTotalPrice, countCategory, setCountCategory, totalPos, setTotalPos}
 }

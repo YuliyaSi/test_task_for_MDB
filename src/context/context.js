@@ -10,6 +10,7 @@ export const Provider = ({children}) => {
         if (value.list.some(item => item.fullname === fullname && item.work === work)) {
             const employee = value.list.find(employee => employee.fullname === fullname && employee.work === work);
             employee.equipment.push({name, desc, option, price})
+            value.setList(value.list)
         } else if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
             value.setList(prevState => [...prevState, {
                 fullname,
@@ -19,6 +20,7 @@ export const Provider = ({children}) => {
         } else {
             alert('Fill all poles');
         }
+        value.countPrice('all')
         value.setName('');
         value.setDesc('');
         value.setPrice('');
@@ -33,6 +35,8 @@ export const Provider = ({children}) => {
         } : employee).filter(employee => employee.equipment.length !== 0);
 
         value.setList(newList);
+        value.countPrice('all')
+
     }
 
     value.countPrice = (selectedValue) => {
@@ -49,6 +53,10 @@ export const Provider = ({children}) => {
             value.setTotalPos(filteredList.length);
         }
 
+    }
+
+    value.addCategoryOption = (newCategory) => {
+        if(newCategory.trim()) value.setCategoryOptions(prevState => [...prevState, newCategory]);
     }
 
   return (

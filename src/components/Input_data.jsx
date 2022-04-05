@@ -1,9 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {AppContext} from "../context/context";
 import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
 
 function InputData() {
     const {
+        categoryOptions,
+        addCategoryOption,
         name,
         setName,
         desc,
@@ -17,6 +19,14 @@ function InputData() {
         work,
         setWork, addToList
     } = useContext(AppContext);
+
+    const [customOption, setCustomOption] = useState('');
+
+    const addOptionAndCleanInput = (value) => {
+        addCategoryOption(value);
+        setCustomOption('')
+    }
+
 
     return (
         <Wrapper>
@@ -54,16 +64,14 @@ function InputData() {
             </div>
             <div>
                 <p>Category of item</p>
+                <Input placeholder={'Set custom category'}
+                       value={customOption}
+                       onChange={(e) => setCustomOption(e.target.value)}
+                       onBlur={() => addOptionAndCleanInput(customOption)}
+                />
                 <Select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">--- choose category ---</option>
-                    <option value="Computers and laptops">Computers and laptops</option>
-                    <option value="Monitors">Monitors</option>
-                    <option value="Computer accessories">Computer accessories</option>
-                    <option value="Computer headphones">Computer headphones</option>
-                    <option value="Printers and multifunction devices">Printers and multifunction devices</option>
-                    <option value="Software">Software</option>
-                    <option value="Office accessorises">Office accessorises</option>
-                    <option value="Other accessories">Other accessories</option>
+                    {categoryOptions.map((opt, ind) => <option key={ind} value={opt}>{opt}</option>)}
                 </Select>
             </div>
             <div>
