@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
-import {AppContext} from "../App";
+import {AppContext} from "../context/context";
 import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
 
 function InputData() {
-
     const {
         name,
         setName,
@@ -13,11 +12,10 @@ function InputData() {
         setPrice,
         category,
         setCategory,
-        addToList,
         fullname,
         setFullname,
         work,
-        setWork
+        setWork, addToList
     } = useContext(AppContext);
 
     return (
@@ -27,7 +25,7 @@ function InputData() {
                 <Input
                     placeholder={'e.g: Jan Kowalski'}
                     value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
+                    onChange={(e) => setFullname(e.target.value.toUpperCase())}
                 />
             </div>
             <div>
@@ -35,7 +33,7 @@ function InputData() {
                 <Input
                     placeholder={'e.g: junior frontend developer'}
                     value={work}
-                    onChange={(e) => setWork(e.target.value)}
+                    onChange={(e) => setWork(e.target.value.toUpperCase())}
                 />
             </div>
             <div>

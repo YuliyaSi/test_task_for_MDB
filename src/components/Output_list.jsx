@@ -1,14 +1,16 @@
-import React, {useContext, useState} from 'react';
-import {AppContext} from "../App";
+import React, {useContext, useEffect} from 'react';
+import {AppContext} from "../context/context";
 import {Table, WrapperOut} from "../styled/Output_list_styles";
 import {FiDelete, FiEdit2} from "react-icons/fi";
 import {Button, Select} from "../styled/Input_data_style";
 
 function OutputList() {
 
-    const {list, deleteFromList, countPrice, totalPrice, totalPos, countCategory, setName, setDesc, setPrice, setCategory} = useContext(AppContext);
+    const {list, totalPrice, totalPos, countCategory, deleteFromList, countPrice} = useContext(AppContext);
 
-    const [editMode, setEditMode] = useState(false);
+    useEffect(() => {
+        countPrice('all')
+    }, [list])
 
     if (list.length === 0) return;
 
@@ -33,16 +35,16 @@ function OutputList() {
                     {item.equipment.map((listItem, ind) => <tr key={listItem.name}>
                         <td>{ind + 1}</td>
                         <td>
-                            {editMode ? <input/> : listItem.name}
+                            {listItem.name}
                         </td>
                         <td>
-                            {editMode ? <input/> : listItem.desc}
+                            {listItem.desc}
                         </td>
                         <td>
-                            {editMode ? <input/> : listItem.option}
+                            {listItem.option}
                         </td>
                         <td>
-                            {editMode ? <input/> : listItem.price + '$'}
+                            {listItem.price + '$'}
                         </td>
                         <td className='with_btn'>
                             <Button onClick={() => deleteFromList(item.fullname, item.work, listItem.name)}>
