@@ -3,6 +3,7 @@ import {AppContext} from "../context/context";
 import {Table, WrapperOut} from "../styled/Output_list_styles";
 import {Select} from "../styled/Input_data_style";
 import Output_list_Row from "./Output_list_Row";
+import {capitalizing} from "../helpers/capitalizing";
 
 function OutputList() {
 
@@ -20,7 +21,7 @@ function OutputList() {
             {list.map((item, index) => {
                 if (item.equipment.length !== 0) return <Table key={index}>
                     <caption>
-                        <span>{item.fullname} - {item.work}</span>
+                        <span>{capitalizing(item.fullname)} - {capitalizing(item.work)}</span>
                     </caption>
                     <thead>
                     <tr>
@@ -40,7 +41,7 @@ function OutputList() {
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colSpan={3}>Total for {item.fullname}:</td>
+                        <td colSpan={3}>Total for {capitalizing(item.fullname)}:</td>
                         <td colSpan={3}>{item.equipment.reduce((acc, next) => acc + Number(next.price), 0)}$</td>
                     </tr>
                     <tr>

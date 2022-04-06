@@ -35,7 +35,7 @@ function InputData() {
                 <Input
                     placeholder={'e.g: Jan Kowalski'}
                     value={fullname}
-                    onChange={(e) => setFullname(e.target.value.toUpperCase())}
+                    onChange={(e) => setFullname(e.target.value)}
                 />
             </div>
             <div>
@@ -43,7 +43,7 @@ function InputData() {
                 <Input
                     placeholder={'e.g: junior frontend developer'}
                     value={work}
-                    onChange={(e) => setWork(e.target.value.toUpperCase())}
+                    onChange={(e) => setWork(e.target.value)}
                 />
             </div>
             <div>

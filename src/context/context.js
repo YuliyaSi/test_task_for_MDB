@@ -1,5 +1,6 @@
 import {createContext} from "react";
 import {useInitializeApp} from "../customHooks/useInitializeApp";
+import {setToLowerCase} from "../helpers/setToLowerCase";
 
 export const AppContext = createContext(null);
 
@@ -7,8 +8,8 @@ export const Provider = ({children}) => {
     let value = useInitializeApp();
 
     value.addToList = (fullname, work, name, desc, option, price) => {
-        if (value.list.some(item => item.fullname === fullname && item.work === work)) {
-            const employee = value.list.find(employee => employee.fullname === fullname && employee.work === work);
+        if (value.list.some(item => setToLowerCase(item.fullname) === setToLowerCase(fullname) && setToLowerCase(item.work) === setToLowerCase(work))) {
+            const employee = value.list.find(employee => setToLowerCase(employee.fullname) === setToLowerCase(fullname) && setToLowerCase(employee.work) === setToLowerCase(work));
             employee.equipment.push({name, desc, option, price})
             value.setList(value.list)
         } else if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
@@ -28,10 +29,15 @@ export const Provider = ({children}) => {
     }
 
     value.updateList = (fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price) => {
-        value.setList(prevState => [ ...prevState.map(listItem => {
-            if (listItem.fullname === fullname && listItem.work === work) {
-                return { ...listItem, equipment: listItem.equipment.map(item => {
-                        if (item.name === prev_name && item.desc === prev_desc && item.option === prev_option && item.price === prev_price) {
+        value.setList(prevState => [...prevState.map(listItem => {
+            if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
+                setToLowerCase(listItem.work) === setToLowerCase(work)) {
+                return {
+                    ...listItem, equipment: listItem.equipment.map(item => {
+                        if (setToLowerCase(item.name) === setToLowerCase(prev_name) &&
+                            setToLowerCase(item.desc) === setToLowerCase(prev_desc) &&
+                            setToLowerCase(item.option) === setToLowerCase(prev_option) &&
+                            item.price === prev_price) {
                             return {name, desc, option, price};
                         } else return item;
                     })
@@ -68,12 +74,12 @@ export const Provider = ({children}) => {
     }
 
     value.addCategoryOption = (newCategory) => {
-        if(newCategory.trim()) value.setCategoryOptions(prevState => [...prevState, newCategory]);
+        if (newCategory.trim()) value.setCategoryOptions(prevState => [...prevState, newCategory]);
     }
 
-  return (
-      <AppContext.Provider value={value}>
-          {children}
-      </AppContext.Provider>
-  )
+    return (
+        <AppContext.Provider value={value}>
+            {children}
+        </AppContext.Provider>
+    )
 }
