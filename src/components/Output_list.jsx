@@ -13,7 +13,7 @@ function OutputList() {
         countPrice('all')
     }, [list])
 
-    console.log(list)
+
     if (list.length === 0) return;
 
     return (
@@ -36,7 +36,7 @@ function OutputList() {
                     <tbody>
 
                     {/* eslint-disable-next-line react/jsx-pascal-case */}
-                    {item.equipment.map((listItem, ind) => <Output_list_Row key={listItem.name} fullname={item.fullname} equipment={listItem} ind={ind} work={item.work}/>)}
+                    {item.equipment.map((listItem, ind) => <Output_list_Row key={listItem.name} fullname={item.fullname} equipment={listItem} ind={ind} work={item.work} categoryOptions={categoryOptions}/>)}
 
                     </tbody>
                     <tfoot>

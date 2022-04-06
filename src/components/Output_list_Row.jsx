@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react';
 import {AppContext} from "../context/context";
 import {FiDelete, FiEdit2} from "react-icons/fi";
-import {Button, Input} from "../styled/Input_data_style";
+import {Button, Input, Select} from "../styled/Input_data_style";
 import {useEditableFields} from "../customHooks/useEditableFields";
 import {arraysEqual} from "../helpers/equalityArrays";
 import {MdOutlineFileDownloadDone} from "react-icons/md";
+import {capitalizing} from "../helpers/capitalizing";
 
-function Output_list_Row({ fullname, work, ind, equipment }) {
+function Output_list_Row({ fullname, work, ind, equipment, categoryOptions }) {
 
     const {deleteFromList, updateList} = useContext(AppContext);
     const { editName, setEditName, editDesc, setEditDesc, editOption, setEditOption, editPrice, setEditPrice } = useEditableFields(equipment)
@@ -23,13 +24,17 @@ function Output_list_Row({ fullname, work, ind, equipment }) {
                     <tr>
                         <td>{ind + 1}</td>
                         <td>
-                            {editMode ? <Input value={editName} onChange={(e) => setEditName(e.target.value)} edit/> : equipment.name}
+                            {editMode ? <Input value={editName} onChange={(e) => setEditName(e.target.value)} edit/> : capitalizing(equipment.name)}
                         </td>
                         <td>
-                            {editMode ? <Input value={editDesc} onChange={(e) => setEditDesc(e.target.value)} edit/> : equipment.desc}
+                            {editMode ? <Input value={editDesc} onChange={(e) => setEditDesc(e.target.value)} edit/> : capitalizing(equipment.desc)}
                         </td>
                         <td>
-                            {editMode ? <Input value={editOption} onChange={(e) => setEditOption(e.target.value)} edit/> : equipment.option}
+                            {editMode ?
+                                <Select value={editOption} onChange={(e) => setEditOption(e.target.value)} edit>
+                                    {categoryOptions.map((opt, ind) => <option key={ind} value={opt}>{opt}</option>)}
+                                </Select> :
+                                equipment.option}
                         </td>
                         <td>
                             {editMode ? <Input value={editPrice} onChange={(e) => setEditPrice(e.target.value)} edit/> : equipment.price + '$'}
