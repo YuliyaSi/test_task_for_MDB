@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Input = styled.input.attrs({ type: 'text' })`
-  padding: 0.5em;
-  margin: 0.5em 0;
+  padding: ${props => props.edit ? '0.1em' : '0.5em'};
+  margin: ${props => props.edit ? 0 : '0.5em 0'};
   border: 1px solid var(--color);
   border-radius: 15px;
   width: 80%;
-  height: 3rem;
+  height: ${props => props.edit ? '1.5rem' : '3rem'};
 `;
 
 export const Select = styled.select`

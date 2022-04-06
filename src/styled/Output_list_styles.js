@@ -5,6 +5,10 @@ export const WrapperOut = styled.div`
   height: fit-content;
   padding: 2rem;
   background-color: #fff;
+  & * {
+    font-family: "Times New Roman", sans-serif;
+  }
+  
 `;
 
 export const Table = styled.table`

@@ -25,7 +25,19 @@ export const Provider = ({children}) => {
         value.setDesc('');
         value.setPrice('');
         value.setCategory('');
+    }
 
+    value.updateList = (fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price) => {
+        value.setList(prevState => [ ...prevState.map(listItem => {
+            if (listItem.fullname === fullname && listItem.work === work) {
+                return { ...listItem, equipment: listItem.equipment.map(item => {
+                        if (item.name === prev_name && item.desc === prev_desc && item.option === prev_option && item.price === prev_price) {
+                            return {name, desc, option, price};
+                        } else return item;
+                    })
+                };
+            } else return listItem;
+        })])
     }
 
     value.deleteFromList = (fullname, work, name) => {

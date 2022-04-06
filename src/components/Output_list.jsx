@@ -1,17 +1,18 @@
 import React, {useContext, useEffect} from 'react';
 import {AppContext} from "../context/context";
 import {Table, WrapperOut} from "../styled/Output_list_styles";
-import {FiDelete, FiEdit2} from "react-icons/fi";
-import {Button, Select} from "../styled/Input_data_style";
+import {Select} from "../styled/Input_data_style";
+import Output_list_Row from "./Output_list_Row";
 
 function OutputList() {
 
-    const {list, totalPrice, totalPos, countCategory, deleteFromList, countPrice, categoryOptions} = useContext(AppContext);
+    const {list, totalPrice, totalPos, countCategory, countPrice, categoryOptions} = useContext(AppContext);
 
     useEffect(() => {
         countPrice('all')
     }, [list])
 
+    console.log(list)
     if (list.length === 0) return;
 
     return (
@@ -32,29 +33,10 @@ function OutputList() {
                     </tr>
                     </thead>
                     <tbody>
-                    {item.equipment.map((listItem, ind) => <tr key={listItem.name}>
-                        <td>{ind + 1}</td>
-                        <td>
-                            {listItem.name}
-                        </td>
-                        <td>
-                            {listItem.desc}
-                        </td>
-                        <td>
-                            {listItem.option}
-                        </td>
-                        <td>
-                            {listItem.price + '$'}
-                        </td>
-                        <td className='with_btn'>
-                            <Button onClick={() => deleteFromList(item.fullname, item.work, listItem.name)}>
-                                <FiDelete/>
-                            </Button>
-                            <Button>
-                                <FiEdit2/>
-                            </Button>
-                        </td>
-                    </tr>)}
+
+                    {/* eslint-disable-next-line react/jsx-pascal-case */}
+                    {item.equipment.map((listItem, ind) => <Output_list_Row key={listItem.name} fullname={item.fullname} equipment={listItem} ind={ind} work={item.work}/>)}
+
                     </tbody>
                     <tfoot>
                     <tr>
