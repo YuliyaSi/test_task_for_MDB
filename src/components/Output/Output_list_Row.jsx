@@ -1,15 +1,15 @@
 import React, {useContext, useState} from 'react';
-import {AppContext} from "../context/context";
+import {AppContext} from "../../context/context";
 import {FiDelete, FiEdit2} from "react-icons/fi";
-import {Button, Input, Select} from "../styled/Input_data_style";
-import {useEditableFields} from "../customHooks/useEditableFields";
-import {arraysEqual} from "../helpers/equalityArrays";
+import {Button, Input, Select} from "../../styled/Input_data_style";
+import {useEditableFields} from "../../customHooks/useEditableFields";
+import {arraysEqual} from "../../helpers/equalityArrays";
 import {MdOutlineFileDownloadDone} from "react-icons/md";
-import {capitalizing} from "../helpers/capitalizing";
+import {capitalizing} from "../../helpers/capitalizing";
 
-function Output_list_Row({ fullname, work, ind, equipment, categoryOptions }) {
+function Output_list_Row({ fullname, work, ind, equipment }) {
 
-    const {deleteFromList, updateList} = useContext(AppContext);
+    const {deleteFromList, updateList, categoryOptions} = useContext(AppContext);
     const { editName, setEditName, editDesc, setEditDesc, editOption, setEditOption, editPrice, setEditPrice } = useEditableFields(equipment)
     const [editMode, setEditMode] = useState(false)
 

@@ -1,5 +1,5 @@
 import InputData from "./components/Input_data";
-import OutputList from "./components/Output_list";
+import OutputList from "./components/Output/Output_list";
 import {Nav, WrapperApp} from "./styled/AppStyle";
 import Footer from "./components/Footer";
 import {Provider} from "./context/context";
