@@ -14,23 +14,26 @@ function OutputList() {
 
     return (
         <WrapperOut>
-            <div>
-                <span style={{marginRight: '1rem'}}>Sort by:</span>
-                <Select edit onChange={(e) => sortEquipment(e.target.value)}>
-                    <option value=""> --- no --- </option>
-                    <option value="name">name of position</option>
-                    <option value="desc">description of position</option>
-                    <option value="option">category of item</option>
-                    <option value="price">price</option>
-                </Select>
+            <div className="editorsHolder">
+                <div>
+                    <span>Sort by:</span>
+                    <Select edit onChange={(e) => sortEquipment(e.target.value)}>
+                        <option value=""> --- no --- </option>
+                        <option value="name">name of position</option>
+                        <option value="desc">description of position</option>
+                        <option value="option">category of item</option>
+                        <option value="price">price</option>
+                    </Select>
+                </div>
+                <div>
+                    <span>Filter by:</span>
+                    <Select edit onChange={e => filterList(e.target.value)}>
+                        <option value=""> --- no --- </option>
+                        {categoryOptions.map((i, ind) => <option key={ind} value={i}>{i}</option>)}
+                    </Select>
+                </div>
             </div>
-            <div>
-                <span style={{marginRight: '1rem'}}>Filter by category:</span>
-                <Select edit onChange={e => filterList(e.target.value)}>
-                    <option value=""> --- no --- </option>
-                    {categoryOptions.map((i, ind) => <option key={ind} value={i}>{i}</option>)}
-                </Select>
-            </div>
+
             {filteredList.map((item, index) => {
                 // eslint-disable-next-line react/jsx-pascal-case
                 if (item.equipment.length !== 0) return <Output_list_mainTable key={index} item={item}/>

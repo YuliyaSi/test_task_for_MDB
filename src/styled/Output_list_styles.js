@@ -8,12 +8,20 @@ export const WrapperOut = styled.div`
   & * {
     font-family: "Times New Roman", sans-serif;
   }
-  & div {
+  .editorsHolder {
+    width: 100%;
     margin-bottom: 1rem;
-    display: inline-grid;
-    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
-  
+  .editorsHolder div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
 `;
 
 export const Table = styled.table`
