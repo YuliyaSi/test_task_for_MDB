@@ -12,15 +12,24 @@ export const WrapperOut = styled.div`
     width: 100%;
     margin-bottom: 1rem;
     display: grid;
+    place-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
   .editorsHolder div {
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
     justify-content: space-around;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
+  }
+  .buttons a {
+    text-decoration: none;
+    color: black;
   }
 `;
 
@@ -33,24 +42,20 @@ export const Table = styled.table`
   caption span {
     margin-left: 1rem;
   }
-  thead {
-    border-bottom: .5px solid black;
-  }
 
   thead td {
     background-color: var(--color);
   }
 
   td {
-    border-right: .5px solid black;
+    border: .5px solid black;
     height: 2em;
     min-width: 3rem;
   }
   .with_btn {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: .5rem;
   }
   Button {
     width: 1.5rem;
@@ -59,10 +64,6 @@ export const Table = styled.table`
     display: grid;
     place-items: center;
     margin: 0;
-  }
-
-  tfoot {
-    border-top: .5px solid black;
   }
   .total {
     text-align: left;
@@ -73,11 +74,11 @@ export const Table = styled.table`
     width: 15rem;
     height: 2rem;
   }
-  border: 1px solid black;
+  
   width: 100%;
   border-collapse: collapse;
   text-align: center;
   padding: 1em;
   background-color: #fff;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;

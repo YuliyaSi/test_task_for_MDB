@@ -1,14 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useRef} from 'react';
 import {AppContext} from "../../context/context";
 import {WrapperOut} from "../../styled/Output_list_styles";
 import Output_list_ResultTable from "./Output_list_ResultTable";
 import Output_list_mainTable from "./Output_list_mainTable";
-import {Select} from "../../styled/Input_data_style";
+import {Button, Select} from "../../styled/Input_data_style";
+import html2PDF from 'jspdf-html2canvas';
 
 
 function OutputList() {
-
     const { categoryOptions, sortEquipment, filteredList, filterList} = useContext(AppContext);
+    const exportedPdf = useRef();
+
+    const downloadFunc = () => {
+        html2PDF(exportedPdf.current, {
+            jsPDF: {
+                format: 'a4',
+            },
+            imageType: 'image/jpeg',
+            output: 'calculating_result.pdf'
+        });
+    }
 
     if (filteredList.length === 0) return;
 
@@ -34,15 +45,22 @@ function OutputList() {
                 </div>
             </div>
 
-            {filteredList.map((item, index) => {
-                // eslint-disable-next-line react/jsx-pascal-case
-                if (item.equipment.length !== 0) return <Output_list_mainTable key={index} item={item}/>
-                else return null;
-            })
-            }
+            <div ref={exportedPdf} style={{padding: '1rem 2rem'}}>
+                {filteredList.map((item, index) => {
+                    // eslint-disable-next-line react/jsx-pascal-case
+                    if (item.equipment.length !== 0) return <Output_list_mainTable key={index} item={item}/>
+                    else return null;
+                })
+                }
 
-            {/* eslint-disable-next-line react/jsx-pascal-case */}
-            <Output_list_ResultTable/>
+                {/* eslint-disable-next-line react/jsx-pascal-case */}
+                <Output_list_ResultTable/>
+            </div>
+
+            <div className='buttons'>
+                <Button onClick={downloadFunc}>Download result table</Button>
+                <Button><a href="https://github.com/YuliyaSi/test_task_for_MDB" target={'_blank'} rel="noreferrer">Go to Source Code</a></Button>
+            </div>
 
         </WrapperOut>
     );
