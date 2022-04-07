@@ -6,11 +6,11 @@ import {Select} from "../../styled/Input_data_style";
 
 function Output_list_ResultTable() {
 
-    const { totalPrice, totalPos, countCategory, countPrice, categoryOptions, list } = useContext(AppContext);
+    const { totalPrice, totalPos, countCategory, countPrice, categoryOptions, filteredList } = useContext(AppContext);
 
     useEffect(() => {
         countPrice('all')
-    }, [list])
+    }, [filteredList])
 
     return (
                 <Table>

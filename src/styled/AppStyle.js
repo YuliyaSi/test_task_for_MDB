@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const WrapperApp = styled.div`
-  height: 100vh;
+  height: fit-content;
   display: flex;
   justify-content: space-around;
   gap: .5rem;

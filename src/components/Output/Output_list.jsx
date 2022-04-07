@@ -8,9 +8,9 @@ import {Select} from "../../styled/Input_data_style";
 
 function OutputList() {
 
-    const {list, categoryOptions, sortEquipment} = useContext(AppContext);
+    const { categoryOptions, sortEquipment, filteredList, filterList} = useContext(AppContext);
 
-    if (list.length === 0) return;
+    if (filteredList.length === 0) return;
 
     return (
         <WrapperOut>
@@ -26,12 +26,12 @@ function OutputList() {
             </div>
             <div>
                 <span style={{marginRight: '1rem'}}>Filter by category:</span>
-                <Select edit>
+                <Select edit onChange={e => filterList(e.target.value)}>
                     <option value=""> --- no --- </option>
                     {categoryOptions.map((i, ind) => <option key={ind} value={i}>{i}</option>)}
                 </Select>
             </div>
-            {list.map((item, index) => {
+            {filteredList.map((item, index) => {
                 // eslint-disable-next-line react/jsx-pascal-case
                 if (item.equipment.length !== 0) return <Output_list_mainTable key={index} item={item}/>
                 else return null;

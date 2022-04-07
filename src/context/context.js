@@ -14,7 +14,7 @@ export const Provider = ({children}) => {
                 if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
                     setToLowerCase(listItem.work) === setToLowerCase(work)) {
                     return {
-                        ...listItem, equipment: [...listItem.equipment, { name, desc, option, price }]
+                        ...listItem, equipment: [...listItem.equipment, { name, desc, option, price: Number(price) }]
                     };
                 } else return listItem;
             })])
@@ -22,7 +22,7 @@ export const Provider = ({children}) => {
             value.setList(prevState => [...prevState, {
                 fullname,
                 work,
-                equipment: [{name, desc, option, price}],
+                equipment: [{name, desc, option, price: Number(price)}],
             }]);
         } else {
             alert('Fill all poles');
@@ -44,7 +44,7 @@ export const Provider = ({children}) => {
                             setToLowerCase(item.desc) === setToLowerCase(prev_desc) &&
                             setToLowerCase(item.option) === setToLowerCase(prev_option) &&
                             item.price === prev_price) {
-                            return {name, desc, option, price};
+                            return {name, desc, option, price: Number(price)};
                         } else return item;
                     })
                 };
@@ -67,30 +67,28 @@ export const Provider = ({children}) => {
         value.setCountCategory(selectedValue);
 
         if (selectedValue === 'all') {
-            value.setTotalPrice(value.list.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0));
-            value.setTotalPos(value.list.reduce((acc, next) => acc + next.equipment.length, 0))
+            value.setTotalPrice(value.filteredList.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0));
+            value.setTotalPos(value.filteredList.reduce((acc, next) => acc + next.equipment.length, 0))
         } else {
             const newList = [];
-            value.list.forEach(employee => employee.equipment.forEach(item => newList.push(item)));
-            const filteredList = newList.filter(item => item.option === selectedValue);
-            value.setTotalPrice(filteredList.reduce((acc, next) => acc + Number(next.price), 0))
-            value.setTotalPos(filteredList.length);
+            value.filteredList.forEach(employee => employee.equipment.forEach(item => newList.push(item)));
+            const filterList = newList.filter(item => item.option === selectedValue);
+            value.setTotalPrice(filterList.reduce((acc, next) => acc + Number(next.price), 0))
+            value.setTotalPos(filterList.length);
         }
 
     }
 
-    value.addCategoryOption = (newCategory) => {
-        if (newCategory.trim()) value.setCategoryOptions(prevState => [...prevState, newCategory]);
-    }
+    value.addCategoryOption = (newCategory) => (newCategory.trim()) ? value.setCategoryOptions(prevState => [...prevState, newCategory]) : null
 
-    value.sortEquipment = (sortValue) => {
-        value.setList(value.list.map(item => {
-            return {
-                ...item,
-                equipment: item.equipment.sort(sortArraysByField(sortValue))
-            }
-        }))
-    }
+    value.sortEquipment = (sortValue) => value.setList(value.list.map(item => ({...item, equipment: item.equipment.sort(sortArraysByField(sortValue))})));
+
+
+    value.filterList = (filter) => (filter) ?
+        value.setFilteredList(value.list.map(item => ({ ...item, equipment: item.equipment.filter(value1 => value1.option === filter)
+    }))) :
+        value.setFilteredList(value.list)
+
 
     return (
         <AppContext.Provider value={value}>
