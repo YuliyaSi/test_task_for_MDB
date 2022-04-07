@@ -1,6 +1,7 @@
 import {createContext} from "react";
 import {useInitializeApp} from "../customHooks/useInitializeApp";
 import {setToLowerCase} from "../helpers/setToLowerCase";
+import {sortArraysByField} from "../helpers/sortArraysByField";
 
 export const AppContext = createContext(null);
 
@@ -9,9 +10,14 @@ export const Provider = ({children}) => {
 
     value.addToList = (fullname, work, name, desc, option, price) => {
         if (value.list.some(item => setToLowerCase(item.fullname) === setToLowerCase(fullname) && setToLowerCase(item.work) === setToLowerCase(work))) {
-            const employee = value.list.find(employee => setToLowerCase(employee.fullname) === setToLowerCase(fullname) && setToLowerCase(employee.work) === setToLowerCase(work));
-            employee.equipment.push({name, desc, option, price})
-            value.setList(value.list)
+            value.setList(prevState => [...prevState.map(listItem => {
+                if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
+                    setToLowerCase(listItem.work) === setToLowerCase(work)) {
+                    return {
+                        ...listItem, equipment: [...listItem.equipment, { name, desc, option, price }]
+                    };
+                } else return listItem;
+            })])
         } else if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
             value.setList(prevState => [...prevState, {
                 fullname,
@@ -75,6 +81,15 @@ export const Provider = ({children}) => {
 
     value.addCategoryOption = (newCategory) => {
         if (newCategory.trim()) value.setCategoryOptions(prevState => [...prevState, newCategory]);
+    }
+
+    value.sortEquipment = (sortValue) => {
+        value.setList(value.list.map(item => {
+            return {
+                ...item,
+                equipment: item.equipment.sort(sortArraysByField(sortValue))
+            }
+        }))
     }
 
     return (

@@ -19,7 +19,7 @@ function Output_list_mainTable({item}) {
                 <td>Description</td>
                 <td>Category</td>
                 <td>Price</td>
-                <td>Delete</td>
+                <td>Edit</td>
             </tr>
             </thead>
             <tbody>

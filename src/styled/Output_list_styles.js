@@ -8,6 +8,11 @@ export const WrapperOut = styled.div`
   & * {
     font-family: "Times New Roman", sans-serif;
   }
+  & div {
+    margin-bottom: 1rem;
+    display: inline-grid;
+    width: 50%;
+  }
   
 `;
 
