@@ -1,11 +1,15 @@
 import React, {useContext, useState} from 'react';
 import {AppContext} from "../context/context";
 import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
+import {useInputData} from "../customHooks/useInputData";
+import {setToLowerCase} from "../helpers/setToLowerCase";
 
 function InputData() {
     const {
-        categoryOptions,
-        addCategoryOption,
+        fullname,
+        setFullname,
+        work,
+        setWork,
         name,
         setName,
         desc,
@@ -13,11 +17,14 @@ function InputData() {
         price,
         setPrice,
         category,
-        setCategory,
-        fullname,
-        setFullname,
-        work,
-        setWork, addToList
+        setCategory
+    } = useInputData();
+
+    const {
+        list,
+        setList,
+        categoryOptions,
+        addCategoryOption,
     } = useContext(AppContext);
 
     const [customOption, setCustomOption] = useState('');
@@ -25,6 +32,32 @@ function InputData() {
     const addOptionAndCleanInput = (value) => {
         addCategoryOption(value);
         setCustomOption('')
+    }
+
+    const addToList = (fullname, work, name, desc, option, price) => {
+        if (list.some(item => setToLowerCase(item.fullname) === setToLowerCase(fullname) && setToLowerCase(item.work) === setToLowerCase(work))) {
+            setList(prevState => [...prevState.map(listItem => {
+                if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
+                    setToLowerCase(listItem.work) === setToLowerCase(work)) {
+                    return {
+                        ...listItem, equipment: [...listItem.equipment, { name, desc, option, price: Number(price) }]
+                    };
+                } else return listItem;
+            })])
+        } else if (fullname.trim() !== '' && work.trim() !== '' && name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
+            setList(prevState => [...prevState, {
+                fullname,
+                work,
+                equipment: [{name, desc, option, price: Number(price)}],
+            }]);
+        } else {
+            alert('Some field is empty!');
+        }
+
+        setName('');
+        setDesc('');
+        setPrice('');
+        setCategory('');
     }
 
 
@@ -64,7 +97,7 @@ function InputData() {
             </div>
             <div>
                 <p>Category of item</p>
-                <Input placeholder={'Set custom category'}
+                <Input placeholder={'Set custom category and choose it from the list'}
                        value={customOption}
                        onChange={(e) => setCustomOption(e.target.value)}
                        onBlur={() => addOptionAndCleanInput(customOption)}

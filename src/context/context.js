@@ -8,32 +8,6 @@ export const AppContext = createContext(null);
 export const Provider = ({children}) => {
     let value = useInitializeApp();
 
-    value.addToList = (fullname, work, name, desc, option, price) => {
-        if (value.list.some(item => setToLowerCase(item.fullname) === setToLowerCase(fullname) && setToLowerCase(item.work) === setToLowerCase(work))) {
-            value.setList(prevState => [...prevState.map(listItem => {
-                if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
-                    setToLowerCase(listItem.work) === setToLowerCase(work)) {
-                    return {
-                        ...listItem, equipment: [...listItem.equipment, { name, desc, option, price: Number(price) }]
-                    };
-                } else return listItem;
-            })])
-        } else if (name.trim() !== '' && desc.trim() !== '' && Number(price) !== 0 && option.trim() !== '') {
-            value.setList(prevState => [...prevState, {
-                fullname,
-                work,
-                equipment: [{name, desc, option, price: Number(price)}],
-            }]);
-        } else {
-            alert('Fill all poles');
-        }
-        value.countPrice('all')
-        value.setName('');
-        value.setDesc('');
-        value.setPrice('');
-        value.setCategory('');
-    }
-
     value.updateList = (fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price) => {
         value.setList(prevState => [...prevState.map(listItem => {
             if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
