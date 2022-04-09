@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {options} from "../options";
 
-export const useInitializeApp = () => {
+export const useCountingFromList = () => {
     const [categoryOptions, setCategoryOptions] = useState(options);
     const [list, setList] = useState(JSON.parse(localStorage.getItem('list')) || []);
     const [filteredList, setFilteredList] = useState(list);

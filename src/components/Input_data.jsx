@@ -17,21 +17,22 @@ function InputData() {
         price,
         setPrice,
         category,
-        setCategory
+        setCategory,
     } = useInputData();
 
     const {
         list,
         setList,
-        categoryOptions,
-        addCategoryOption,
+        categoryOptions, setCategoryOptions
     } = useContext(AppContext);
 
     const [customOption, setCustomOption] = useState('');
 
-    const addOptionAndCleanInput = (value) => {
-        addCategoryOption(value);
-        setCustomOption('')
+    const addOptionAndCleanInput = (newCategory) => {
+        if (newCategory.trim()) {
+            setCategoryOptions(prevState => [...prevState, newCategory]);
+            setCustomOption('')
+        }
     }
 
     const addToList = (fullname, work, name, desc, option, price) => {

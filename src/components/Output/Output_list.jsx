@@ -5,11 +5,19 @@ import Output_list_ResultTable from "./Output_list_ResultTable";
 import Output_list_mainTable from "./Output_list_mainTable";
 import {Button, Select} from "../../styled/Input_data_style";
 import html2PDF from 'jspdf-html2canvas';
+import {sortArraysByField} from "../../helpers/sortArraysByField";
 
 
 function OutputList() {
-    const { categoryOptions, sortEquipment, filteredList, filterList} = useContext(AppContext);
+    const { categoryOptions, filteredList, setList, list, setFilteredList} = useContext(AppContext);
     const exportedPdf = useRef();
+
+    const sortEquipment = (sortValue) => setList(list.map(item => ({...item, equipment: item.equipment.sort(sortArraysByField(sortValue))})));
+
+    const filterList = (filter) => (filter) ?
+        setFilteredList(list.map(item => ({ ...item, equipment: item.equipment.filter(value1 => value1.option === filter)
+        }))) :
+        setFilteredList(list)
 
     const downloadFunc = () => {
         html2PDF(exportedPdf.current, {

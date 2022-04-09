@@ -6,10 +6,11 @@ import {useEditableFields} from "../../customHooks/useEditableFields";
 import {arraysEqual} from "../../helpers/equalityArrays";
 import {MdOutlineFileDownloadDone} from "react-icons/md";
 import {capitalizing} from "../../helpers/capitalizing";
+import {setToLowerCase} from "../../helpers/setToLowerCase";
 
 function Output_list_Row({fullname, work, ind, equipment}) {
 
-    const {deleteFromList, updateList, categoryOptions} = useContext(AppContext);
+    const {list, setList, categoryOptions} = useContext(AppContext);
     const {
         editName,
         setEditName,
@@ -20,6 +21,7 @@ function Output_list_Row({fullname, work, ind, equipment}) {
         editPrice,
         setEditPrice
     } = useEditableFields(equipment)
+
     const [editMode, setEditMode] = useState(false)
 
     const editData = (fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price) => {
@@ -27,6 +29,34 @@ function Output_list_Row({fullname, work, ind, equipment}) {
             updateList(fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price);
         }
         setEditMode(false)
+    }
+
+    const updateList = (fullname, work, prev_name, prev_desc, prev_option, prev_price, name, desc, option, price) => {
+        setList(prevState => [...prevState.map(listItem => {
+            if (setToLowerCase(listItem.fullname) === setToLowerCase(fullname) &&
+                setToLowerCase(listItem.work) === setToLowerCase(work)) {
+                return {
+                    ...listItem, equipment: listItem.equipment.map(item => {
+                        if (setToLowerCase(item.name) === setToLowerCase(prev_name) &&
+                            setToLowerCase(item.desc) === setToLowerCase(prev_desc) &&
+                            setToLowerCase(item.option) === setToLowerCase(prev_option) &&
+                            item.price === prev_price) {
+                            return {name, desc, option, price: Number(price)};
+                        } else return item;
+                    })
+                };
+            } else return listItem;
+        })])
+    }
+
+    const deleteFromList = (fullname, work, name) => {
+        const newList = list.map(employee => (employee.fullname === fullname && employee.work === work) ? {
+            ...employee,
+            equipment: employee.equipment.filter(item => item.name !== name)
+        } : employee).filter(employee => employee.equipment.length !== 0);
+
+        setList(newList);
+
     }
 
     return (
