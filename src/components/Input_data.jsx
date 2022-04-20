@@ -3,6 +3,7 @@ import {AppContext} from "../context/context";
 import {Button, Input, Select, Wrapper} from "../styled/Input_data_style";
 import {useInputData} from "../customHooks/useInputData";
 import {setToLowerCase} from "../helpers/setToLowerCase";
+import {useCountingFromList} from "../customHooks/useCountingFromList";
 
 function InputData() {
     const {
@@ -20,7 +21,9 @@ function InputData() {
         setCategory,
     } = useInputData();
 
-    const { list, setList, categoryOptions, setCategoryOptions } = useContext(AppContext);
+    const { categoryOptions, setCategoryOptions } = useCountingFromList()
+
+    const { list, setList } = useContext(AppContext);
 
     const [customOption, setCustomOption] = useState('');
 

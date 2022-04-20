@@ -2,11 +2,13 @@ import React, {useContext, useEffect} from 'react';
 import {AppContext} from "../../context/context";
 import {Table} from "../../styled/Output_list_styles";
 import {Select} from "../../styled/Input_data_style";
+import {useCountingFromList} from "../../customHooks/useCountingFromList";
 
 
 function Output_list_ResultTable() {
 
-    const {totalPrice, totalPos, countCategory, categoryOptions, filteredList, setCountCategory, setTotalPrice, setTotalPos} = useContext(AppContext);
+    const { totalPrice, totalPos, countCategory, categoryOptions, setCountCategory, setTotalPrice, setTotalPos } = useCountingFromList()
+    const { filteredList } = useContext(AppContext);
 
     const countPrice = (selectedValue) => {
         setCountCategory(selectedValue);

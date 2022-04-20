@@ -6,11 +6,13 @@ import Output_list_mainTable from "./Output_list_mainTable";
 import {Button, Select} from "../../styled/Input_data_style";
 import html2PDF from 'jspdf-html2canvas';
 import {sortArraysByField} from "../../helpers/sortArraysByField";
+import {useCountingFromList} from "../../customHooks/useCountingFromList";
 
 
 function OutputList() {
 
-    const { categoryOptions, filteredList, setList, list, setFilteredList} = useContext(AppContext);
+    const { filteredList, setList, list, setFilteredList} = useContext(AppContext);
+    const { categoryOptions } = useCountingFromList()
     const exportedPdf = useRef();
 
     const sortEquipment = (sortValue) => setList(list.map(item => ({...item, equipment: item.equipment.sort(sortArraysByField(sortValue))})));

@@ -7,10 +7,12 @@ import {arraysEqual} from "../../helpers/equalityArrays";
 import {MdOutlineFileDownloadDone} from "react-icons/md";
 import {capitalizing} from "../../helpers/capitalizing";
 import {setToLowerCase} from "../../helpers/setToLowerCase";
+import {useCountingFromList} from "../../customHooks/useCountingFromList";
 
 function Output_list_Row({fullname, work, ind, equipment}) {
 
-    const { list, setList, categoryOptions } = useContext(AppContext);
+    const { list, setList  } = useContext(AppContext);
+    const { categoryOptions } = useCountingFromList()
     const {
         editName,
         setEditName,
