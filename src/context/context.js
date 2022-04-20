@@ -9,7 +9,7 @@ export const Provider = ({children}) => {
     const value = useCountingFromList();
 
     return (
-        <AppContext.Provider value={{value}}>
+        <AppContext.Provider value={value}>
             {children}
         </AppContext.Provider>
     )

@@ -20,8 +20,7 @@ function InputData() {
         setCategory,
     } = useInputData();
 
-    const { value } = useContext(AppContext);
-    const { list, setList, categoryOptions, setCategoryOptions } = value;
+    const { list, setList, categoryOptions, setCategoryOptions } = useContext(AppContext);
 
     const [customOption, setCustomOption] = useState('');
 

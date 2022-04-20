@@ -6,8 +6,7 @@ import {Select} from "../../styled/Input_data_style";
 
 function Output_list_ResultTable() {
 
-    const { value } = useContext(AppContext);
-    const {totalPrice, totalPos, countCategory, categoryOptions, filteredList, setCountCategory, setTotalPrice, setTotalPos} = value;
+    const {totalPrice, totalPos, countCategory, categoryOptions, filteredList, setCountCategory, setTotalPrice, setTotalPos} = useContext(AppContext);
 
     const countPrice = (selectedValue) => {
         setCountCategory(selectedValue);
