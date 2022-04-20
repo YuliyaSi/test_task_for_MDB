@@ -1,9 +1,8 @@
 import {useContext, useState} from "react";
 import {options} from "../options";
-import {THook} from "../types/HooksType";
 import {AppContext} from "../context/context";
 
-export const useCountingFromList: THook<object> = () => {
+export const useCountingFromList = () => {
 
     // @ts-ignore
     const { list } = useContext(AppContext)
@@ -13,5 +12,5 @@ export const useCountingFromList: THook<object> = () => {
     const [countCategory, setCountCategory] = useState<string>('all');
     const [totalPos, setTotalPos] = useState<number>(list.reduce((acc: number, next: { equipment: any[]; }) => acc + next.equipment.length, 0));
 
-    return {categoryOptions, setCategoryOptions, totalPrice, setTotalPrice, countCategory, setCountCategory, totalPos, setTotalPos}
+    return [categoryOptions, setCategoryOptions, totalPrice, setTotalPrice, countCategory, setCountCategory, totalPos, setTotalPos] as const;
 }
