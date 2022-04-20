@@ -1,0 +1,1 @@
+export const options: string[] = ["Computers and laptops", "Monitors", "Computer accessories", "Computer headphones", "Printers and multifunction devices", "Software", "Office accessorises", "Other accessories"];

@@ -1,7 +1,9 @@
-import {createContext} from "react";
+import React, {createContext} from "react";
 import {useCountingFromList} from "../customHooks/useCountingFromList";
 
 export const AppContext = createContext(null);
+
+
 
 export const Provider = ({children}) => {
     const value = useCountingFromList();

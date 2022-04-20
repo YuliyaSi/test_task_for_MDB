@@ -1,4 +1,6 @@
-export const arraysEqual = (a, b) => {
+type TEqual<T> = (a: T, b: T) => boolean;
+
+export const arraysEqual: TEqual<[]> = (a, b) => {
     if (a === b) return true;
     if (a == null || b == null) return false;
     if (a.length !== b.length) return false;

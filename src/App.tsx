@@ -3,8 +3,9 @@ import OutputList from "./components/Output/Output_list";
 import {Nav, WrapperApp} from "./styled/AppStyle";
 import Footer from "./components/Footer";
 import {Provider} from "./context/context";
+import React from "react";
 
-function App() {
+const App: React.FC = () => {
 
     return (
         <Provider>

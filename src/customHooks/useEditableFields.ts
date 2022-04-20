@@ -1,6 +1,8 @@
 import {useState} from "react";
+import {IEquip, TEditHook} from "../types/HooksType";
 
-export const useEditableFields = (equip) => {
+
+export const useEditableFields: TEditHook<IEquip, object> = (equip) => {
     const [editName, setEditName] = useState(equip.name);
     const [editDesc, setEditDesc] = useState(equip.desc);
     const [editOption, setEditOption] = useState(equip.option);

@@ -29,7 +29,7 @@ function OutputList() {
         });
     }
 
-    if (filteredList.length === 0) return;
+    if (filteredList.length === 0) return null;
 
     return (
         <WrapperOut>
