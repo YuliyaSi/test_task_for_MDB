@@ -6,7 +6,23 @@ import {Select} from "../../styled/Input_data_style";
 
 function Output_list_ResultTable() {
 
-    const { totalPrice, totalPos, countCategory, countPrice, categoryOptions, filteredList } = useContext(AppContext);
+    const { value } = useContext(AppContext);
+    const {totalPrice, totalPos, countCategory, categoryOptions, filteredList, setCountCategory, setTotalPrice, setTotalPos} = value;
+
+    const countPrice = (selectedValue) => {
+        setCountCategory(selectedValue);
+
+        if (selectedValue === 'all') {
+            setTotalPrice(filteredList.reduce((acc, next) => acc + next.equipment.reduce((accum, nextPos) => accum + Number(nextPos.price), 0), 0));
+            setTotalPos(filteredList.reduce((acc, next) => acc + next.equipment.length, 0))
+        } else {
+            const newList = [];
+            filteredList.forEach(employee => employee.equipment.forEach(item => newList.push(item)));
+            const filterList = newList.filter(item => item.option === selectedValue);
+            setTotalPrice(filterList.reduce((acc, next) => acc + Number(next.price), 0))
+            setTotalPos(filterList.length);
+        }
+    }
 
     useEffect(() => {
         countPrice('all')

@@ -9,7 +9,8 @@ import {sortArraysByField} from "../../helpers/sortArraysByField";
 
 
 function OutputList() {
-    const { categoryOptions, filteredList, setList, list, setFilteredList} = useContext(AppContext);
+    const { value } = useContext(AppContext);
+    const { categoryOptions, filteredList, setList, list, setFilteredList} = value;
     const exportedPdf = useRef();
 
     const sortEquipment = (sortValue) => setList(list.map(item => ({...item, equipment: item.equipment.sort(sortArraysByField(sortValue))})));

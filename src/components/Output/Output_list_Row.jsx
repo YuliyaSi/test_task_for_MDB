@@ -10,7 +10,8 @@ import {setToLowerCase} from "../../helpers/setToLowerCase";
 
 function Output_list_Row({fullname, work, ind, equipment}) {
 
-    const {list, setList, categoryOptions} = useContext(AppContext);
+    const {value} = useContext(AppContext);
+    const { list, setList, categoryOptions } = value;
     const {
         editName,
         setEditName,
