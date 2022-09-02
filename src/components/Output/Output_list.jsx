@@ -12,7 +12,7 @@ import {useCountingFromList} from "../../customHooks/useCountingFromList";
 function OutputList() {
 
     const { filteredList, setList, list, setFilteredList} = useContext(AppContext);
-    const { categoryOptions } = useCountingFromList()
+    const [ categoryOptions ] = useCountingFromList()
     const exportedPdf = useRef();
 
     const sortEquipment = (sortValue) => setList(list.map(item => ({...item, equipment: item.equipment.sort(sortArraysByField(sortValue))})));

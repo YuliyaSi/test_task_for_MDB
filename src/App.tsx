@@ -14,7 +14,7 @@ const App: React.FC = () => {
             </Nav>
             <WrapperApp>
                 <InputData/>
-                <OutputList/>
+                {/*<OutputList/>*/}
             </WrapperApp>
             <Footer/>
         </Provider>

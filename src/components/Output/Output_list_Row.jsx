@@ -12,7 +12,7 @@ import {useCountingFromList} from "../../customHooks/useCountingFromList";
 function Output_list_Row({fullname, work, ind, equipment}) {
 
     const { list, setList  } = useContext(AppContext);
-    const { categoryOptions } = useCountingFromList()
+    const [ categoryOptions ] = useCountingFromList()
     const {
         editName,
         setEditName,

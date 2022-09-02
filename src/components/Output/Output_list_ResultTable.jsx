@@ -7,7 +7,7 @@ import {useCountingFromList} from "../../customHooks/useCountingFromList";
 
 function Output_list_ResultTable() {
 
-    const { totalPrice, totalPos, countCategory, categoryOptions, setCountCategory, setTotalPrice, setTotalPos } = useCountingFromList()
+    const [ totalPrice, totalPos, countCategory, categoryOptions, setCountCategory, setTotalPrice, setTotalPos ] = useCountingFromList()
     const { filteredList } = useContext(AppContext);
 
     const countPrice = (selectedValue) => {
